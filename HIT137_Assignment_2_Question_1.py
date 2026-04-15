@@ -1,5 +1,5 @@
 # HIT137 Assignment 2 - Question 1
-# Simple Encryption and Decryption Program
+
 
 # -------------------------------------------------------
 # STEP 1: Get shift values from the user
