@@ -69,6 +69,19 @@ def format_result(val):
     return str(round(val, 4))
 
 
+# ---------------- NO CLASS STATE (REPLACEMENT) ---------------- #
+
+def make_state(tokens):
+    return {"tokens": tokens, "i": 0}
+
+def cur(s):
+    return s["tokens"][s["i"]]
+
+def eat(s):
+    s["i"] += 1
+
+
+
 # format result
 def make_state(tokens):
     pass
