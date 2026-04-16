@@ -82,15 +82,92 @@ def eat(s):
 
 
 
+
 # format result
 def make_state(tokens):
     pass
 
-# parser
-def parse_expression(s):
-    pass
 
-# format result
+
+# ---------------- PARSER ---------------- #
+
+def parse_expression(s):
+    val, tree = parse_term(s)
+
+    while cur(s)[0] == "OP" and cur(s)[1] in "+-":
+        op = cur(s)[1]
+        eat(s)
+
+        r_val, r_tree = parse_term(s)
+
+        if op == "+":
+            val += r_val
+        else:
+            val -= r_val
+
+        tree = f"({op} {tree} {r_tree})"
+
+    return val, tree
+
+
+def parse_term(s):
+    val, tree = parse_factor(s)
+
+    while True:
+        t_type, t_val = cur(s)
+
+        if t_type == "OP" and t_val in "*/":
+            op = t_val
+            eat(s)
+
+            r_val, r_tree = parse_factor(s)
+
+            if op == "*":
+                val *= r_val
+            else:
+                val /= r_val
+
+            tree = f"({op} {tree} {r_tree})"
+            continue
+
+        if t_type in ("NUM", "LPAREN"):
+            r_val, r_tree = parse_factor(s)
+            val *= r_val
+            tree = f"(* {tree} {r_tree})"
+            continue
+
+        break
+
+    return val, tree
+
+
+def parse_factor(s):
+    t_type, t_val = cur(s)
+
+    if t_type == "OP" and t_val == "-":
+        eat(s)
+        val, tree = parse_factor(s)
+        return -val, f"(neg {tree})"
+
+    if t_type == "OP" and t_val == "+":
+        raise ValueError("Unary plus not allowed")
+
+    if t_type == "LPAREN":
+        eat(s)
+        val, tree = parse_expression(s)
+
+        if cur(s)[0] != "RPAREN":
+            raise ValueError("Missing )")
+
+        eat(s)
+        return val, tree
+
+    if t_type == "NUM":
+        eat(s)
+        return float(t_val), t_val
+
+    raise ValueError("Invalid syntax")
+
 
 
 # ---------------- EVALUATE FUNCTION ---------------- #
