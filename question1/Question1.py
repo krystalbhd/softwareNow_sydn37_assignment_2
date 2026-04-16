@@ -40,7 +40,7 @@ def encrypt_char(char):
 
 def encrypt():
     try:
-        # Setup input path
+        # Setting up input path
         input_path = os.path.join(BASE_DIR, 'raw_text.txt')
         output_path = os.path.join(BASE_DIR, 'encrypted_text.txt')
 
@@ -155,7 +155,7 @@ def decrypt():
         print("Verification FAILED - the texts do not match.")
         print("(This can happen when two letters share the same encrypted form)")
 
-# Call all the functions
+# Calling all the functions
 print("")
 encrypt()
 decrypt()
