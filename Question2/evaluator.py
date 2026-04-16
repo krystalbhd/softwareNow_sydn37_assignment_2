@@ -8,9 +8,44 @@ import os
 
 
 
-# tokenize
+# ---------------- TOKENIZER ---------------- #
+
 def tokenize(expr):
-    pass
+    tokens = []
+    i = 0
+
+    while i < len(expr):
+        c = expr[i]
+
+        if c.isspace():
+            i += 1
+            continue
+
+        if c.isdigit():
+            num = c
+            i += 1
+            while i < len(expr) and (expr[i].isdigit() or expr[i] == "."):
+                num += expr[i]
+                i += 1
+            tokens.append(("NUM", num))
+            continue
+
+        if c in "+-*/":
+            tokens.append(("OP", c))
+
+        elif c == "(":
+            tokens.append(("LPAREN", "("))
+
+        elif c == ")":
+            tokens.append(("RPAREN", ")"))
+
+        else:
+            raise ValueError("Invalid character")
+
+        i += 1
+
+    tokens.append(("END", ""))
+    return tokens
 
 # format tokens
 def format_tokens(tokens):
