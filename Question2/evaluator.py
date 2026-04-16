@@ -1,12 +1,11 @@
-import os
-
 # Name: Krystal Bhandari | Student No: S401359 | Contribution:
 # Implemented a simple expression evaluator by tokenizing arithmetic input, formatting tokens, 
 # managing parser state, and building a recursive descent parser to evaluate expressions with 
 # basic operators and parentheses, then formatting and writing the results to an output file.
 
 
-
+# import module
+import os
 
 # ---------------- TOKENIZER ---------------- #
 
