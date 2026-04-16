@@ -1,6 +1,7 @@
 # Software Now_Assignment 2; Question no 2 : Program that reads mathematical expressions from a text file (one per line),evaluates each expression, and writes the results to an output file. 
 
 
+
  #Contributor: 
  # Krystal Bhandari(s401359) : Implemented a simple expression evaluator by tokenizing arithmetic input, formatting tokens, managing parser state, and building a recursive descent parser to evaluate expressions with basic operators and parentheses, then formatting and writing the results to an output file.
  # Shreya Khatri(s401360): Tokenization, formatting, and file I/O handling for reading expressions and writing results, as well as error handling to ensure robustness in the evaluation process.
