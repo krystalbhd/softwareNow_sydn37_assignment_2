@@ -43,9 +43,11 @@ def encrypt():
         # Setup input path
         input_path = os.path.join(BASE_DIR, 'raw_text.txt')
         output_path = os.path.join(BASE_DIR, 'encrypted_text.txt')
+
+        print("Looking for file at:", input_path)
         
         # Check if file exists
-        if not os.path.exists('raw_text.txt'):
+        if not os.path.exists(input_path):
             raise FileNotFoundError("raw_text.txt not found!")
 
         # Read input file
