@@ -83,11 +83,6 @@ def eat(s):
 
 
 
-# format result
-def make_state(tokens):
-    pass
-
-
 
 # ---------------- PARSER ---------------- #
 
