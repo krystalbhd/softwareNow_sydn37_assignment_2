@@ -1,3 +1,5 @@
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 shift1 = int(input("Enter shift1: "))
 shift2 = int(input("Enter shift2: "))
@@ -37,21 +39,40 @@ def encrypt_char(char):
 
 
 def encrypt():
-  
-    input_file = open('raw_text.txt', 'r')
-    original_text = input_file.read()
-    input_file.close()
+    try:
+        # Setup input path
+        input_path = os.path.join(BASE_DIR, 'raw_text.txt')
+        output_path = os.path.join(BASE_DIR, 'encrypted_text.txt')
+        
+        # Check if file exists
+        if not os.path.exists('raw_text.txt'):
+            raise FileNotFoundError("raw_text.txt not found!")
+
+        # Read input file
+        with open(input_path, 'r') as input_file:
+            original_text = input_file.read()
+
+        # Encrypt text
+        encrypted_text = ""
+        for char in original_text:
+            encrypted_text += encrypt_char(char)
+
+        # Write output file
+        with open(output_path, 'w') as output_file:
+            output_file.write(encrypted_text)
+
+        print("Encryption done! File saved: encrypted_text.txt")
+
+    except FileNotFoundError as e:
+        print("File Error:", e)
+
+    except PermissionError:
+        print("Permission denied: Unable to access the file.")
+
+    except Exception as e:
+        print("An unexpected error occurred:", e)
 
 
-    encrypted_text = ""
-    for char in original_text:
-        encrypted_text = encrypted_text + encrypt_char(char)
-
-  
-    output_file = open('encrypted_text.txt', 'w')
-    output_file.write(encrypted_text)
-    output_file.close()
-
-    print("Encryption done! File saved: encrypted_text.txt")
-
+# Call all the functions
+print("")
 encrypt()
