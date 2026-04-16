@@ -138,9 +138,25 @@ def decrypt():
 
     except Exception as e:
         print("An unexpected error occurred:", e)
+       
+#verification
+   def verify():
+    file1 = open('raw_text.txt', 'r')
+    original = file1.read()
+    file1.close()
 
+    file2 = open('decrypted_text.txt', 'r')
+    decrypted = file2.read()
+    file2.close()
+
+    if original == decrypted:
+        print("Verification PASSED - the decrypted text matches the original!")
+    else:
+        print("Verification FAILED - the texts do not match.")
+        print("(This can happen when two letters share the same encrypted form)")
 
 # Call all the functions
 print("")
 encrypt()
 decrypt()
+verify()
