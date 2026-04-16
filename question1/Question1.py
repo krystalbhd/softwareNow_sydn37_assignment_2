@@ -5,6 +5,7 @@ shift2 = int(input("Enter shift2: "))
 
 
 
+
 def encrypt_char(char):
    
     if 'a' <= char <= 'z':
