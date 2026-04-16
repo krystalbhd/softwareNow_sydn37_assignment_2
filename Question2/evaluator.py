@@ -1,14 +1,16 @@
-# Name: Krystal Bhandari | Student No: S401359 | Contribution:
-# Implemented a simple expression evaluator by tokenizing arithmetic input, formatting tokens, 
-# managing parser state, and building a recursive descent parser to evaluate expressions with 
-# basic operators and parentheses, then formatting and writing the results to an output file.
+# Software Now_Assignment 2; Question no 2 : Program that reads mathematical expressions from a text file (one per line),evaluates each expression, and writes the results to an output file. 
 
+
+ #Contributor: 
+ # Krystal Bhandari(s401359) : Implemented a simple expression evaluator by tokenizing arithmetic input, formatting tokens, managing parser state, and building a recursive descent parser to evaluate expressions with basic operators and parentheses, then formatting and writing the results to an output file.
+ # Shreya Khatri(s401360): Tokenization, formatting, and file I/O handling for reading expressions and writing results, as well as error handling to ensure robustness in the evaluation process.
 
 # import module
 import os
 
 # ---------------- TOKENIZER ---------------- #
 
+# Breaks the expression into small meaningful parts like numbers, operators, and brackets
 def tokenize(expr):
     tokens = []
     i = 0
@@ -46,8 +48,9 @@ def tokenize(expr):
     tokens.append(("END", ""))
     return tokens
 
-# ---------------- FORMATTERS ---------------- #
+# ---------------- FORMATTERS ---------------- 
 
+#Converts token list into readable string format required by assignment
 def format_tokens(tokens):
     out = []
     for t, v in tokens:
@@ -57,6 +60,7 @@ def format_tokens(tokens):
             out.append(f"[{t}:{v}]")
     return " ".join(out)
 
+# Formats final result (removes .0 for integers, rounds floats properly)
 
 def format_result(val):
     if isinstance(val, str):
@@ -70,21 +74,23 @@ def format_result(val):
 
 # ---------------- NO CLASS STATE (REPLACEMENT) ---------------- #
 
+# Creates a simple pointer-based state for tracking token position
+
 def make_state(tokens):
     return {"tokens": tokens, "i": 0}
 
+# returns current token
 def cur(s):
     return s["tokens"][s["i"]]
 
+# moves to next token
 def eat(s):
     s["i"] += 1
 
 
-
-
-
 # ---------------- PARSER ---------------- #
 
+# Handles + and - (lowest priority operations)
 def parse_expression(s):
     val, tree = parse_term(s)
 
@@ -103,7 +109,7 @@ def parse_expression(s):
 
     return val, tree
 
-
+# Handles multiplication, division, and implicit multiplication
 def parse_term(s):
     val, tree = parse_factor(s)
 
@@ -134,7 +140,7 @@ def parse_term(s):
 
     return val, tree
 
-
+# Handles numbers, brackets, and unary operations
 def parse_factor(s):
     t_type, t_val = cur(s)
 
@@ -166,6 +172,7 @@ def parse_factor(s):
 
 # ---------------- EVALUATE FUNCTION ---------------- #
 
+# Reads input file, evaluates expressions, and writes output file
 def evaluate_file(input_path: str):
 
     output_path = os.path.join(os.path.dirname(input_path), "output.txt")
@@ -213,9 +220,6 @@ def evaluate_file(input_path: str):
 
     return results
 
-
-
-
-# --- run main program ---
+# --- main program ---
 if __name__ == "__main__":
     evaluate_file("input.txt")
