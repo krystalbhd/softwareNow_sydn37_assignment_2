@@ -47,9 +47,27 @@ def tokenize(expr):
     tokens.append(("END", ""))
     return tokens
 
-# format tokens
+# ---------------- FORMATTERS ---------------- #
+
 def format_tokens(tokens):
-    pass
+    out = []
+    for t, v in tokens:
+        if t == "END":
+            out.append("[END]")
+        else:
+            out.append(f"[{t}:{v}]")
+    return " ".join(out)
+
+
+def format_result(val):
+    if isinstance(val, str):
+        return "ERROR"
+
+    if abs(val - int(val)) < 1e-9:
+        return str(int(val))
+
+    return str(round(val, 4))
+
 
 # format result
 def make_state(tokens):
@@ -60,8 +78,7 @@ def parse_expression(s):
     pass
 
 # format result
-def format_result(value):
-    pass
+
 
 # ---------------- EVALUATE FUNCTION ---------------- #
 
