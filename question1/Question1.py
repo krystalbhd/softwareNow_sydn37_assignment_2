@@ -76,27 +76,27 @@ def decrypt_char(char):
     if 'a' <= char <= 'z':
         position = ord(char) - ord('a')
 
-        # Reversing the first-half shift
-        guess = (position - shift1 * shift2) % 26
-        if 'a' <= chr(guess + ord('a')) <= 'm':
-            return chr(guess + ord('a'))
+        if char <= 'm':
+            orig_position = (position - shift1 * shift2) % 13
+            return chr(orig_position + ord('a'))
 
-        # Otherwise reverse the second-half shift
-        guess = (position + shift1 + shift2) % 26
-        return chr(guess + ord('a'))
+        else:
+            pos_in_half = position - 13
+            orig_pos_in_half = (pos_in_half + shift1 + shift2) % 13
+            return chr(orig_pos_in_half + 13 + ord('a'))
 
     # Uppercase letters
     elif 'A' <= char <= 'Z':
         position = ord(char) - ord('A')
 
-        # Try reversing the first-half shift
-        guess = (position + shift1) % 26
-        if 'A' <= chr(guess + ord('A')) <= 'M':
-            return chr(guess + ord('A'))
+        if char <= 'M':
+            orig_position = (position + shift1) % 13
+            return chr(orig_position + ord('A'))
 
-        # Reverse the second-half shift
-        guess = (position - shift2 * shift2) % 26
-        return chr(guess + ord('A'))
+        else:
+            pos_in_half = position - 13
+            orig_pos_in_half = (pos_in_half - shift2 * shift2) % 13
+            return chr(orig_pos_in_half + 13 + ord('A'))
     else:
         return char
 
