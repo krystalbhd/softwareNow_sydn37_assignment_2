@@ -1,3 +1,8 @@
+#This question was solved with the collaborative effort of Nuha Fadilah Zahidy and MD Shahriar Islam
+#Nuha Fadilah Zahidy: Encryption_process, Verification process
+#MD Shahriar Islam: Decryption process, Verification process
+
+
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
