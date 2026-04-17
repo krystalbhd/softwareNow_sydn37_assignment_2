@@ -13,29 +13,27 @@ def encrypt_char(char):
 
         if 'a' <= char <= 'm':
             
-            new_position = (position + shift1 * shift2) % 26
+            new_position = (position + shift1 * shift2) % 13
         else:
           
-            new_position = (position - (shift1 + shift2)) % 26
-
-        return chr(new_position + ord('a'))
+            position_in_half = position - 13
+            new_position_in_half = (position_in_half - (shift1 + shift2)) % 13
+            return chr(new_position_in_half + 13 + ord('a'))  
+        
+        return chr(new_position + ord('a'))          
 
 
     elif 'A' <= char <= 'Z':
         position = ord(char) - ord('A')
 
         if 'A' <= char <= 'M':
-            
-            new_position = (position - shift1) % 26
+            new_position = (position - shift1) % 13
+            return chr(new_position + ord('A'))            
+
         else:
-           
-            new_position = (position + shift2 * shift2) % 26
-
-        return chr(new_position + ord('A'))
-
-  #For everything else, keep it the same
-    else:
-        return char
+            pos_in_half = position - 13                    
+            new_pos_in_half = (pos_in_half + shift2 * shift2) % 13
+            return chr(new_pos_in_half + 13 + ord('A'))     
 
 def encrypt():
     try:
