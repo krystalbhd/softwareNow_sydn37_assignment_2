@@ -42,8 +42,6 @@ def encrypt():
         # Setting up input path
         input_path = os.path.join(BASE_DIR, 'raw_text.txt')
         output_path = os.path.join(BASE_DIR, 'encrypted_text.txt')
-
-        print("Looking for file at:", input_path)
         
         # Check if file exists
         if not os.path.exists(input_path):
@@ -139,20 +137,36 @@ def decrypt():
         print("An unexpected error occurred:", e)
        
 #verification
-   def verify():
-    file1 = open('raw_text.txt', 'r')
-    original = file1.read()
-    file1.close()
+def verify():
+    try:
+        input_path = os.path.join(BASE_DIR, 'raw_text.txt')
+        decrypted_path = os.path.join(BASE_DIR, 'decrypted_text.txt')
 
-    file2 = open('decrypted_text.txt', 'r')
-    decrypted = file2.read()
-    file2.close()
+        # Check both files exist
+        if not os.path.exists(input_path):
+            raise FileNotFoundError("raw_text.txt not found!")
 
-    if original == decrypted:
-        print("Verification PASSED - the decrypted text matches the original!")
-    else:
-        print("Verification FAILED - the texts do not match.")
-        print("(This can happen when two letters share the same encrypted form)")
+        if not os.path.exists(decrypted_path):
+            raise FileNotFoundError("decrypted_text.txt not found!")
+
+        # Read both files
+        with open(input_path, 'r') as file1:
+            original_text = file1.read()
+
+        with open(decrypted_path, 'r') as file2:
+            decrypted_text = file2.read()
+
+        # Compare
+        if original_text == decrypted_text:
+            print("Verification successful: Files match!")
+        else:
+            print("Verification failed: Files do NOT match!")
+
+    except FileNotFoundError as e:
+        print("File Error:", e)
+
+    except Exception as e:
+        print("Unexpected error:", e)
 
 # Calling all the functions
 print("")
