@@ -14,6 +14,7 @@ def encrypt_char(char):
         if char <= 'm':
             
             new_position = (position + shift1 * shift2) % 13
+            return chr(new_position + ord('a'))
         else:
           
             position_in_half = position - 13
